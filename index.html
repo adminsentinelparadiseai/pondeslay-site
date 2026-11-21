@@ -660,7 +660,10 @@ footer{background:#fbefe9}
     set('phoneErr',$('phone').value.replace(/\D/g,'').length>=10?'':'Enter a 10-digit mobile number.');
     set('dateErr',$('date').value?'':'Pick a preferred date.');
     if(!ok){$('okBox').hidden=true;return;}
-    $('okMsg').textContent='Request ready: '+$('service').options[$('service').selectedIndex].text+', '+$('len').options[$('len').selectedIndex].text.replace(/ \(.*\)/,'').toLowerCase()+'. To lock it in, text these details to 562-225-9516. (Online booking goes live soon.)';
+    const det=$('service').options[$('service').selectedIndex].text+', '+$('len').options[$('len').selectedIndex].text.replace(/ \(.*\)/,'').toLowerCase();
+    $('okMsg').textContent='Request ready: '+det+'. Your messages app is opening so you can text it to 562-225-9516.';
+    const body='Hi Pon de Slay! Booking request: '+det+'. Preferred date: '+$('date').value+'. Name: '+$('name').value.trim()+'. '+($('notes').value.trim()?'Details: '+$('notes').value.trim():'');
+    setTimeout(()=>{location.href='sms:+15622259516?&body='+encodeURIComponent(body)},300);
     $('okBox').hidden=false;
   });
 
@@ -673,77 +676,6 @@ footer{background:#fbefe9}
 </script>
 <style id="ed-style">
 .featured{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))!important;min-height:120px}
-body.editing .featured,body.editing [data-list]{min-height:120px;outline:1px dashed #c9a24a55;outline-offset:6px;border-radius:14px}
-body.editing #work .ph{cursor:grab}
-body.editing figure[data-slot]{outline:3px dashed #c9a24a;outline-offset:3px;cursor:pointer}
-.sortable-ghost{opacity:.35}
-.sortable-chosen{box-shadow:0 0 0 3px #c9a24a}
-#edbar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;background:rgba(20,10,14,.94);color:#f3e9ea;padding:10px 14px;border-radius:999px;font-size:13px;display:flex;gap:10px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:calc(100vw - 32px)}
-#edbar button{background:#c9a24a;color:#3a0f2a;border:0;border-radius:999px;padding:6px 12px;font:inherit;font-weight:600;cursor:pointer}
-#edm{position:fixed;inset:0;z-index:60;background:rgba(10,5,8,.6);display:none;align-items:center;justify-content:center;padding:16px}
-#edm.on{display:flex}
-#edm .box{background:#1c1015;color:#f3e9ea;border-radius:16px;padding:16px;max-width:380px;width:100%;max-height:90vh;overflow:auto}
-#edm img{width:100%;max-height:200px;object-fit:contain;border-radius:10px;margin-bottom:10px;background:#000}
-#edm .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-#edm button{padding:9px;border-radius:10px;border:1px solid #c9a24a88;background:none;color:inherit;font:inherit;font-size:13px;cursor:pointer}
-#edm button.cur{background:#c9a24a;color:#3a0f2a}
-#edm button.wide{grid-column:1/-1}
 </style>
-<div id="edm" role="dialog" aria-modal="true" aria-label="Place photo"><div class="box"><img alt=""><div class="opts"></div></div></div>
-<div id="edbar" hidden><span id="edmsg">Tap a top photo to swap it ¬∑ drag gallery photos to reorder</span><button type="button" id="edtog">Done</button></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
-<script>
-(function(){
-  var work=document.getElementById('work'); if(!work)return;
-  // top-area photo slots (outside the gallery)
-  var SLOTN={'hero-1':'Top banner (left)','hero-2':'Top banner (right)','princess':'Princess Cyberspace card','hecula':'Hecula card','services':'Wicks & Locs service photo','svc-ind':'Individuals service photo','svc-stitch':'Stitch service photo','svc-fest':'Festival service photo','svc-kids':'Kids service photo','fest-1':'Festival photo 1','fest-2':'Festival photo 2','fest-3':'Festival photo 3'};
-  var topImgs=[].filter.call(document.querySelectorAll('figure.ph img'),function(i){return !work.contains(i)});
-  var ids=['hero-1','hero-2','princess','hecula','services','svc-ind','svc-stitch','svc-fest','svc-kids','fest-1','fest-2','fest-3'];
-  var slots={};topImgs.forEach(function(img,k){if(ids[k]){img.parentNode.setAttribute('data-slot',ids[k]);slots[ids[k]]=img}});
-  var lists=[].slice.call(work.querySelectorAll('[data-list]'));
-  function name(l){var id=l.getAttribute('data-list');if(id==='featured')return 'Featured (top row)';var h=document.getElementById(id);return h?h.textContent:id}
-  function srcOf(f){return f.querySelector('img').getAttribute('src')}
-  var ref=null,topRef=null,saveT=null,msg=document.getElementById('edmsg'),sorts=[];
-  function layout(){var o={};lists.forEach(function(l){o[l.getAttribute('data-list')]=[].map.call(l.querySelectorAll(':scope > figure'),srcOf)});return o}
-  function say(t){msg.textContent=t}
-  function save(){if(!ref){say('Changed (not saved)');return}say('Saving‚Ä¶');clearTimeout(saveT);saveT=setTimeout(function(){ref.set({lists:layout(),updated:Date.now()}).then(function(){say('Saved ¬∑ drag to reorder ¬∑ tap any photo')}).catch(function(){say('Not saved, try again')})},500)}
-  function setSlot(id,src,store){var i=slots[id];if(!i)return;i.src=src;i.removeAttribute('srcset');if(store&&topRef){var p={};p[id]=src;say('Saving‚Ä¶');topRef.update(p).then(function(){say('Saved ¬∑ drag to reorder ¬∑ tap any photo')}).catch(function(){say('Not saved, try again')})}}
-  function apply(d){if(!d||!d.lists)return;var all={};[].forEach.call(work.querySelectorAll('figure.ph'),function(f){var i=f.querySelector('img');if(i)all[i.getAttribute('src')]=f});
-    lists.forEach(function(l){var arr=d.lists[l.getAttribute('data-list')];if(!arr)return;arr.forEach(function(s){if(all[s])l.appendChild(all[s])})})}
-  var dlg=document.getElementById('edm'),opts=dlg.querySelector('.opts'),pic=dlg.querySelector('img');
-  function close(){dlg.classList.remove('on')}
-  function btn(t,cls,fn){var b=document.createElement('button');b.type='button';b.textContent=t;if(cls)b.className=cls;b.onclick=function(){fn();close()};opts.appendChild(b)}
-  function head(t){var h=document.createElement('div');h.className='wide';h.style.cssText='grid-column:1/-1;font-size:12px;opacity:.7;margin-top:6px';h.textContent=t;opts.appendChild(h)}
-  function cancel(){var c=document.createElement('button');c.type='button';c.className='wide';c.textContent='Cancel';c.onclick=close;opts.appendChild(c)}
-  function openMenu(f){pic.style.display='';pic.src=f.querySelector('img').src;opts.innerHTML='';var here=f.parentNode,src=srcOf(f);
-    head('Put this photo at the top of the site');
-    ids.forEach(function(id){if(slots[id])btn(SLOTN[id],'',function(){setSlot(id,src,true)})});
-    head('Move within the gallery');
-    btn('Move to top of this section','wide',function(){here.insertBefore(f,here.firstChild);save()});
-    btn('Move to end of this section','wide',function(){here.appendChild(f);save()});
-    lists.forEach(function(l){btn(name(l),l===here?'cur':'',function(){l.insertBefore(f,l.firstChild);save()})});
-    cancel();dlg.classList.add('on')}
-  function openSlot(id){pic.style.display='none';opts.innerHTML='';head('Pick a photo for: '+SLOTN[id]);
-    [].forEach.call(work.querySelectorAll('figure.ph img'),function(i){var s=i.getAttribute('src');var b=document.createElement('button');b.type='button';b.style.padding='0';b.innerHTML='<img alt="" style="width:100%;height:110px;object-fit:cover;margin:0;border-radius:9px">';b.firstChild.src=s;b.onclick=function(){setSlot(id,s,true);close()};opts.appendChild(b)});
-    cancel();dlg.classList.add('on')}
-  var editing=false;
-  function setEdit(on){editing=on;document.body.classList.toggle('editing',on);document.getElementById('edtog').textContent=on?'Done':'Edit photos';sorts.forEach(function(s){s.option('disabled',!on)})}
-  document.addEventListener('click',function(e){if(!editing||dlg.contains(e.target)||e.target.closest('#edbar'))return;var f=e.target.closest('figure.ph');if(!f)return;
-    var sl=f.getAttribute('data-slot');if(sl){e.preventDefault();openSlot(sl);return}
-    if(work.contains(f)&&f.parentNode.hasAttribute('data-list')){e.preventDefault();openMenu(f)}},true);
-  dlg.addEventListener('click',function(e){if(e.target===dlg)close()});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
-  document.getElementById('edtog').onclick=function(){setEdit(!editing)};
-  if(window.Sortable)lists.forEach(function(l){sorts.push(Sortable.create(l,{group:'pics',animation:150,delay:180,delayOnTouchOnly:true,draggable:'figure',ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',disabled:true,onEnd:save}))});
-  (async function(){try{
-    var user=await window.claude.use('user');var owner=user?await user.isOwner():false;
-    var db=await window.claude.use('db');
-    if(db){ref=db.doc('edits/order');topRef=db.doc('edits/top');
-      var s=await ref.get();apply(s&&(s.data?s.data():s));
-      var t=await topRef.get();t=t&&(t.data?t.data():t);if(t)Object.keys(t).forEach(function(k){if(slots[k]&&typeof t[k]==='string')setSlot(k,t[k],false)})}
-    if(owner){document.getElementById('edbar').hidden=false;setEdit(true)}
-  }catch(e){}})();
-})();
-</script>
 
 </html>
