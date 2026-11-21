@@ -1,0 +1,726 @@
+<title>Pon de Slay Hair Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,700&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: dark studio "chair" hero with photo stack, then services, work gallery, rate calculator, booking. One warm grade unifies every photo. */
+:root{
+  --bg:#f6f1ee; --surface:#ffffff; --ink:#22161a; --muted:#6e5a60; --line:#e3d6d9;
+  --oxblood:#5b1a2b; --gold:#c2185b; --goldsoft:#fde2e4;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, sans-serif;
+  --mono:"Space Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#150e11; --surface:#1f1519; --ink:#f3e9ea; --muted:#b9a3a9; --line:#3a2a30;
+  --oxblood:#c9566f; --gold:#f4b8a0; --goldsoft:#3a2d1c; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#150e11; --surface:#1f1519; --ink:#f3e9ea; --muted:#b9a3a9; --line:#3a2a30;
+  --oxblood:#c9566f; --gold:#f4b8a0; --goldsoft:#3a2d1c; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body)}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);line-height:1.02;text-wrap:balance;margin:0}
+.eyebrow{font:400 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+a{color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;border:1.5px solid transparent;cursor:pointer}
+.btn-primary{background:var(--gold);color:#1a1012}
+.btn-ghost{border-color:currentColor;background:transparent;color:inherit}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Photo grade: every image gets the same warm studio treatment */
+.ph{position:relative;overflow:hidden;border-radius:14px;background:#2a1a1f;aspect-ratio:3/4;max-width:100%}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(.16) saturate(.88) contrast(1.07) brightness(.97)}
+.ph::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 20%,rgba(255,214,170,.10),rgba(60,18,30,.30));mix-blend-mode:multiply;pointer-events:none}
+.ph figcaption{position:absolute;left:10px;bottom:10px;z-index:1;font:400 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;background:rgba(20,10,14,.72);color:#f3e9ea;padding:6px 9px;border-radius:6px}
+
+/* Header */
+header.top{background:#3a0f2a;color:#f3e9ea}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:18px;flex-wrap:wrap}
+.logo{font:800 24px/1 var(--display);letter-spacing:.02em}
+.logo span{color:#f4b8a0}.logo{display:flex;align-items:center;gap:10px}.logo .mark{width:40px;height:40px;flex:none}.logo .lw span{color:#f4b8a0}.name-note{display:inline-flex;gap:10px;align-items:baseline;margin:0 0 18px;padding:8px 14px;border:1px solid var(--gold);border-radius:999px;font-size:14px}.name-note b{font-family:var(--display);color:var(--gold)}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:14px;flex-wrap:wrap}
+.nav ul a{text-decoration:none;opacity:.85}
+.nav ul a:hover{opacity:1;color:#f4b8a0}
+
+/* Hero */
+.hero{background:#3a0f2a;color:#f3e9ea;padding-block:28px 72px}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(44px,7vw,88px);font-weight:800;letter-spacing:-.02em;margin-top:16px}
+.hero h1 em{font-style:normal;color:#f4b8a0}
+.hero p.lede{font-size:18px;max-width:52ch;color:#d9c7cb;margin:22px 0 28px}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.facts{display:flex;gap:28px;margin-top:36px;flex-wrap:wrap}
+.facts div{display:flex;flex-direction:column;gap:4px}
+.facts b{font:700 28px/1 var(--display);color:#f3e9ea}
+.facts span{font:400 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#b9a3a9}
+.stack{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+.stack .ph:nth-child(2){margin-top:48px}
+
+/* Sections */
+section{padding-block:80px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.sec-head h2{font-size:clamp(32px,4.4vw,52px);font-weight:700;margin-top:10px}
+.sec-head p{max-width:46ch;color:var(--muted);margin:0}
+
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.svc h3{font-size:24px;font-weight:700}
+.svc p{margin:0;color:var(--muted)}
+.svc ul{margin:0;padding-left:18px;color:var(--ink);font-size:15px}
+.svc .tag{align-self:flex-start;font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--goldsoft);color:var(--ink);padding:6px 9px;border-radius:6px}
+.svc.feature{grid-column:span 2;display:grid;grid-template-columns:1fr 220px;gap:24px;align-items:center}
+.svc.feature .ph{aspect-ratio:3/4}
+
+/* Gallery */
+.gal-nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}.gal-nav a{padding:8px 14px;border:1px solid var(--gold);border-radius:999px;font-size:13px;text-decoration:none;color:inherit}.gal-nav a:hover{background:var(--gold);color:#3a0f2a}.gal-h{margin:36px 0 14px;font-size:clamp(20px,2.4vw,28px);scroll-margin-top:80px}.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.note{font-size:13px;color:var(--muted);margin-top:14px}
+
+/* Process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.step{border-top:2px solid var(--gold);padding-top:16px;min-width:0}
+.step::before{counter-increment:s;content:"Step " counter(s);font:400 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.step h3{font-size:20px;margin:10px 0 6px}
+.step p{margin:0;color:var(--muted);font-size:15px}
+
+/* Booking */
+.book{background:#3a0f2a;color:#f3e9ea}
+.book .sec-head p{color:#d9c7cb}
+.book-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+label{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#b9a3a9}
+input,select,textarea{font:inherit;color:#f3e9ea;background:#4a1838;border:1px solid #6e2a52;border-radius:10px;padding:12px 14px;width:100%}
+textarea{min-height:96px;resize:vertical}
+.err{color:#ff9fb1;font-size:13px;min-height:1em}
+.range-row{display:flex;align-items:center;gap:12px}
+.range-row input{padding:0;accent-color:#f4b8a0}
+.range-row output{font:700 20px/1 var(--display);min-width:64px}
+.summary{background:#4a1838;border:1px solid #6e2a52;border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px)}
+.summary h3{font-size:22px}
+.line{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums;color:#d9c7cb}
+.total{border-top:1px dashed #4a343b;padding-top:12px;display:flex;justify-content:space-between;align-items:baseline}
+.total b{font:800 40px/1 var(--display);color:#f4b8a0;font-variant-numeric:tabular-nums}
+.contact{display:flex;flex-direction:column;gap:6px;font-size:15px;margin-top:6px}
+.contact code{font:400 15px/1.3 var(--mono);color:#f3e9ea;user-select:all}
+.copy{font:600 12px/1 var(--body);background:transparent;color:#f4b8a0;border:1px solid #f4b8a0;border-radius:999px;padding:6px 10px;cursor:pointer;align-self:flex-start}
+.ok{background:#2c3a26;border:1px solid #4f6b43;color:#dfeed6;border-radius:12px;padding:14px;font-size:15px}
+
+/* FAQ */
+details{border-bottom:1px solid var(--line);padding-block:16px}
+summary{cursor:pointer;font:600 18px/1.3 var(--body);list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--gold);font-size:22px;line-height:1}
+details[open] summary::after{content:"‚Äì"}
+details p{color:var(--muted);margin:10px 0 0;max-width:70ch}
+
+footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:14px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .hero-grid,.book-grid{grid-template-columns:1fr}
+  .services{grid-template-columns:1fr 1fr}
+  .svc.feature{grid-column:1/-1}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr 1fr}
+  .summary{position:static}
+}
+@media (max-width:560px){
+  .services,.steps{grid-template-columns:1fr}
+  .svc.feature{grid-template-columns:1fr}
+  .svc.feature .ph{max-width:260px}
+  form{grid-template-columns:1fr}
+  .nav ul{gap:14px}
+  section{padding-block:56px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .ph img{transition:transform .5s ease}
+  .ph:hover img{transform:scale(1.04)}
+}
+.from{font-weight:700;font-size:1.05rem;margin:0}
+.fest{background:#3a0f2a;color:#f3e9ea}
+.fest .sec-head p{color:#d9c7cb}
+.fest .svc{background:#4a1838;border-color:#6e2a52}
+.fest .svc p,.fest .svc ul{color:#d9c7cb}
+.fest .svc h3,.fest .from{color:#f3e9ea}
+.fest .svc .tag{background:linear-gradient(90deg,#7cf7c7,#c38bff);color:#3a0f2a}
+.fest h2{background:linear-gradient(90deg,#f3e9ea,#c38bff 60%,#7cf7c7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fest-cta{margin:28px 0 0}
+.clients{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.client.star{grid-column:1/-1}
+.client{background:#4a1838;border:1px solid #6e2a52;border-radius:16px;padding:20px;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center;min-width:0}
+.client.star{border-color:#f4b8a0;grid-template-columns:260px 1fr}
+.mono{aspect-ratio:3/4;border-radius:14px;display:grid;place-items:center;font:800 72px/1 var(--display);color:#3a0f2a;background:linear-gradient(140deg,#f4b8a0,#f3e1b8 45%,#c38bff)}
+.client h3{font-size:clamp(26px,3vw,38px);margin:10px 0 6px}
+.client .role{color:#f4b8a0;font-weight:600;margin:0 0 8px}
+.client p{color:#d9c7cb;margin:0}
+.client .tag{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(90deg,#f4b8a0,#c38bff);color:#3a0f2a;padding:6px 9px;border-radius:6px}
+.fest-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+@media (max-width:900px){.clients{grid-template-columns:1fr}}
+@media (max-width:560px){.client,.client.star{grid-template-columns:1fr}.client .ph{max-width:280px}.fest-gallery{grid-template-columns:1fr 1fr}}
+.featured{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}.featured .ph{aspect-ratio:3/4;border:2px solid var(--gold)}#work .ph img{filter:none}@media (max-width:900px){.featured{grid-template-columns:repeat(2,1fr)}}
+</style>
+<style id="luxe">
+:root{--bg:#fdf8f3;--surface:#fff;--ink:#2b1a1f;--muted:#7a5f66;--line:#f0dcd6;--gold:#c2185b;--goldsoft:#fde2e4;--hib:#c2185b;--peach:#f4b8a0;
+ --display:"Playfair Display",Georgia,serif;--body:"Jost",system-ui,sans-serif;--mono:"Jost",system-ui,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#fdf8f3;--surface:#fff;--ink:#2b1a1f;--muted:#7a5f66;--line:#f0dcd6;--gold:#c2185b;--goldsoft:#fde2e4;color-scheme:light}}
+:root[data-theme="dark"]{--bg:#fdf8f3;--surface:#fff;--ink:#2b1a1f;--muted:#7a5f66;--line:#f0dcd6;--gold:#c2185b;--goldsoft:#fde2e4;color-scheme:light}
+body{font-size:17px}
+h1,h2,h3{font-weight:700!important;letter-spacing:-.01em}
+h2 em,h1 em{font-style:italic}
+.eyebrow{font:italic 500 17px/1.2 var(--display)!important;letter-spacing:0!important;text-transform:none!important;color:var(--hib)!important}
+.fest .eyebrow,.book .eyebrow,#clients .eyebrow{color:var(--peach)!important}
+label,.svc .tag,.client .tag,.ph figcaption,.facts span,.step::before{font-family:var(--body)!important;text-transform:none!important;letter-spacing:.02em!important}
+.svc .tag,.client .tag{font-size:12px!important;font-weight:600;border-radius:999px!important;padding:6px 12px!important}
+.svc .tag{background:#fde2e4!important;color:#8a1a46!important}
+header.top,.hero{background:radial-gradient(90% 120% at 85% 0%,#fbd9cf 0%,#fdf1ea 45%,#fdf8f3 100%)!important;color:var(--ink)!important}
+.logo .lw span,.logo span{color:var(--hib)!important}
+.logo .mark circle{stroke:var(--hib)}
+.nav ul a:hover{color:var(--hib)!important}
+.hero h1{font-weight:800!important;letter-spacing:-.025em!important}
+.hero h1 em{color:var(--hib)!important;font-style:italic}
+.hero p.lede{color:var(--muted)!important}
+.facts b{color:var(--ink)!important}.facts span{color:var(--muted)!important}
+.name-note{background:#fff!important;border:1px solid var(--line)!important;color:var(--ink)!important}
+.name-note span{color:var(--muted)!important}
+.btn-primary{background:var(--hib)!important;color:#fff!important;box-shadow:0 10px 26px -10px rgba(194,24,91,.6)}
+.btn-ghost{color:var(--ink)}
+.fest .btn-primary,.book .btn-primary{background:var(--peach)!important;color:#3a0f2a!important}
+.fest .btn-ghost,.book .btn-ghost{color:#fff}
+.fest,.book{background:linear-gradient(155deg,#3a0f2a 0%,#5e1740 55%,#8c2453 100%)!important}
+.ph{border-radius:22px!important;box-shadow:0 18px 40px -22px rgba(58,15,42,.45)}
+.ph img{filter:none!important}.ph::after{display:none}
+.svc{border-radius:22px!important;box-shadow:0 14px 36px -26px rgba(58,15,42,.35)}
+.svc-ph{aspect-ratio:4/3!important;margin:-6px -6px 4px!important}
+.svc.feature .ph{aspect-ratio:3/4!important}
+.from{font:italic 600 16px/1.2 var(--display)!important;color:var(--hib)!important}
+.fest .from{color:var(--peach)!important}
+.featured .ph{border:3px solid #fff!important;outline:1px solid var(--line)}
+.gal-nav a{border-color:var(--line)!important;background:#fff}
+.gal-nav a:hover{background:var(--hib)!important;color:#fff!important}
+.step{border-top-color:var(--hib)!important}
+footer{background:#fbefe9}
+.name-note{margin-top:22px!important}
+</style>
+
+<header class="top">
+  <div class="wrap nav">
+    <div class="logo"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="#f4b8a0" stroke-width="2.5"/><g fill="none" stroke-linecap="round"><path d="M32.0 12.0 L34.9 13.0 L37.5 14.0 L39.5 15.0 L40.7 16.0 L41.0 17.0 L40.3 18.0 L38.7 19.0 L36.3 20.0 L33.5 21.0 L30.6 22.0 L27.8 23.0 L25.4 24.0 L23.8 25.0 L23.0 26.0 L23.3 27.0 L24.4 28.0 L26.4 29.0 L29.0 30.0 L31.9 31.0 L34.8 32.0 L37.4 33.0 L39.5 34.0 L40.7 35.0 L41.0 36.0 L40.3 37.0 L38.7 38.0 L36.4 39.0 L33.7 40.0 L30.7 41.0 L27.9 42.0 L25.5 43.0 L23.8 44.0 L23.1 45.0 L23.2 46.0 L24.3 47.0 L26.3 48.0 L28.9 49.0 L31.8 50.0 L34.7 51.0 L37.3 52.0" stroke="#1a1012" stroke-width="8"/><path d="M32.0 12.0 L34.9 13.0 L37.5 14.0 L39.5 15.0 L40.7 16.0 L41.0 17.0 L40.3 18.0 L38.7 19.0 L36.3 20.0 L33.5 21.0 L30.6 22.0 L27.8 23.0 L25.4 24.0 L23.8 25.0 L23.0 26.0 L23.3 27.0 L24.4 28.0 L26.4 29.0 L29.0 30.0 L31.9 31.0 L34.8 32.0 L37.4 33.0 L39.5 34.0 L40.7 35.0 L41.0 36.0 L40.3 37.0 L38.7 38.0 L36.4 39.0 L33.7 40.0 L30.7 41.0 L27.9 42.0 L25.5 43.0 L23.8 44.0 L23.1 45.0 L23.2 46.0 L24.3 47.0 L26.3 48.0 L28.9 49.0 L31.8 50.0 L34.7 51.0 L37.3 52.0" stroke="#f4b8a0" stroke-width="4.5"/><path d="M39.8 12.0 L37.9 13.0 L35.4 14.0 L32.5 15.0 L29.6 16.0 L26.9 17.0 L24.8 18.0 L23.4 19.0 L23.0 20.0 L23.6 21.0 L25.0 22.0 L27.2 23.0 L30.0 24.0 L32.9 25.0 L35.8 26.0 L38.2 27.0 L40.0 28.0 L40.9 29.0 L40.9 30.0 L39.9 31.0 L38.0 32.0 L35.5 33.0 L32.6 34.0 L29.7 35.0 L27.0 36.0 L24.8 37.0 L23.5 38.0 L23.0 39.0 L23.5 40.0 L24.9 41.0 L27.1 42.0 L29.8 43.0 L32.8 44.0 L35.7 45.0 L38.1 46.0 L39.9 47.0 L40.9 48.0 L40.9 49.0 L39.9 50.0 L38.1 51.0 L35.6 52.0" stroke="#1a1012" stroke-width="8"/><path d="M39.8 12.0 L37.9 13.0 L35.4 14.0 L32.5 15.0 L29.6 16.0 L26.9 17.0 L24.8 18.0 L23.4 19.0 L23.0 20.0 L23.6 21.0 L25.0 22.0 L27.2 23.0 L30.0 24.0 L32.9 25.0 L35.8 26.0 L38.2 27.0 L40.0 28.0 L40.9 29.0 L40.9 30.0 L39.9 31.0 L38.0 32.0 L35.5 33.0 L32.6 34.0 L29.7 35.0 L27.0 36.0 L24.8 37.0 L23.5 38.0 L23.0 39.0 L23.5 40.0 L24.9 41.0 L27.1 42.0 L29.8 43.0 L32.8 44.0 L35.7 45.0 L38.1 46.0 L39.9 47.0 L40.9 48.0 L40.9 49.0 L39.9 50.0 L38.1 51.0 L35.6 52.0" stroke="#fde2e4" stroke-width="4.5"/><path d="M24.2 12.0 L23.2 13.0 L23.1 14.0 L24.0 15.0 L25.7 16.0 L28.1 17.0 L31.0 18.0 L33.9 19.0 L36.7 20.0 L38.9 21.0 L40.4 22.0 L41.0 23.0 L40.6 24.0 L39.3 25.0 L37.2 26.0 L34.5 27.0 L31.6 28.0 L28.7 29.0 L26.2 30.0 L24.3 31.0 L23.2 32.0 L23.1 33.0 L23.9 34.0 L25.6 35.0 L28.0 36.0 L30.9 37.0 L33.8 38.0 L36.6 39.0 L38.8 40.0 L40.4 41.0 L41.0 42.0 L40.6 43.0 L39.4 44.0 L37.3 45.0 L34.7 46.0 L31.7 47.0 L28.8 48.0 L26.3 49.0 L24.3 50.0 L23.2 51.0 L23.1 52.0" stroke="#1a1012" stroke-width="8"/><path d="M24.2 12.0 L23.2 13.0 L23.1 14.0 L24.0 15.0 L25.7 16.0 L28.1 17.0 L31.0 18.0 L33.9 19.0 L36.7 20.0 L38.9 21.0 L40.4 22.0 L41.0 23.0 L40.6 24.0 L39.3 25.0 L37.2 26.0 L34.5 27.0 L31.6 28.0 L28.7 29.0 L26.2 30.0 L24.3 31.0 L23.2 32.0 L23.1 33.0 L23.9 34.0 L25.6 35.0 L28.0 36.0 L30.9 37.0 L33.8 38.0 L36.6 39.0 L38.8 40.0 L40.4 41.0 L41.0 42.0 L40.6 43.0 L39.4 44.0 L37.3 45.0 L34.7 46.0 L31.7 47.0 L28.8 48.0 L26.3 49.0 L24.3 50.0 L23.2 51.0 L23.1 52.0" stroke="#c9566f" stroke-width="4.5"/></g></svg><span class="lw">PON DE <span>SLAY</span></span></div>
+    <ul>
+      <li><a href="#clients">Clientele</a></li>
+      <li><a href="#concierge">Concierge</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#festival">Burning Man</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#book">Rates &amp; Booking</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Private braider to artists, actors &amp; DJs ¬∑ Los Angeles &amp; worldwide</div>
+      <h1>Red-carpet braids. <em>On your schedule.</em></h1>
+      <p class="name-note"><b>Pon de Slay</b> <span>Caribbean for &ldquo;on the slay.&rdquo; Say it like you mean it.</span></p>
+      <p class="lede">Pondeslay is the private mobile hair studio trusted by recording artists, screen talent and the people who host them. We come to your home, hotel suite, set or tour stop, braid by hand, and keep it discreet.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#concierge">Book private concierge</a>
+        <a class="btn btn-ghost" href="#clients">See the clientele</a>
+      </div>
+      <div class="facts">
+        <div><b>On set</b><span>Hotel, home, tour<br>or green room</span></div>
+        <div><b>NDA</b><span>Discretion<br>on request</span></div>
+        <div><b>Day 1</b><span>Mature-looking<br>instant wicks</span></div>
+      </div>
+    </div>
+    <div class="stack">
+      <figure class="ph" style="margin:0"><img src="media/platinum-braids.jpg" alt="Long platinum braids with wavy ends, seen from behind"><figcaption>Platinum braids</figcaption></figure>
+      <figure class="ph" style="margin:0"><img src="media/festival-lavender.jpg" alt="Waist-length lavender, peach and blue festival braids"><figcaption>Festival pastels</figcaption></figure>
+    </div>
+  </div>
+</div>
+
+<section id="clients" class="fest">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Clientele</div><h2>Braided for the spotlight</h2></div>
+      <p>From premiere nights to festival main stages, Pondeslay styles talent who are photographed for a living.</p>
+    </div>
+    <div class="clients">
+      <article class="client star">
+        <figure class="ph" style="margin:0"><video src="media/quartay-karate.mp4" poster="media/quartay-boho.jpg" autoplay muted loop playsinline aria-label="Quartay DeNaya training, swinging her Pondeslay braids" style="width:100%;height:100%;object-fit:cover;display:block"></video></figure>
+        <div>
+          <span class="tag">Feature film ¬∑ Martial artist</span>
+          <h3>Quartay DeNaya</h3>
+          <p class="role">Star of <em>Paper Made</em> ¬∑ <em>Dolemite Is My Name</em> ¬∑ Black belt</p>
+          <p>Bora Bora boho braids in honey-auburn shades 27 and 30, braided by Pondeslay. Press-day and premiere styling delivered privately, on her schedule.</p>
+          <p style="margin-top:10px"><a href="https://www.instagram.com/quartaydenaya/" style="color:#f4b8a0">@quartaydenaya</a></p>
+        </div>
+      </article>
+      <article class="client">
+        <figure class="ph" style="margin:0"><img src="media/princess-cyberspace.jpg" alt="Princess Cyberspace with pastel pink and white braids"></figure>
+        <div>
+          <span class="tag">Music</span>
+          <h3>Princess Cyberspace</h3>
+          <p class="role">International techno DJ &amp; recording artist</p>
+          <p>Pink-and-blue and platinum braids built for Berlin, London and Burning Man stages.</p>
+        </div>
+      </article>
+      <article class="client">
+        <figure class="ph" style="margin:0"><img src="media/hecula-hd.jpg" alt="Hecula performing on stage with microphone, wearing his Pondeslay stitch braids" style="object-position:center top"><figcaption>Photo @shotby_bullet</figcaption></figure>
+        <div>
+          <span class="tag">Hip-hop</span>
+          <h3>Hecula</h3>
+          <p class="role">Cinematic hip-hop artist ¬∑ TV &amp; streaming sync</p>
+          <p>Sharp stitch braids for shows and album shoots, including <em>Come Ride With Me</em>.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="concierge">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Private concierge</div><h2>The studio comes to you</h2></div>
+      <p>For talent, executives and private clients who need it done right, done quietly and done on time.</p>
+    </div>
+    <div class="services">
+      <article class="svc"><span class="tag">VIP</span><h3>Set &amp; Premiere Styling</h3><p class="from">Private quote</p><p>On-set, press-day and red-carpet braids, with touch-ups between looks.</p></article>
+      <article class="svc"><span class="tag">Travel</span><h3>Hotel, Tour &amp; Destination</h3><p class="from">Quoted per trip</p><p>Your suite, tour bus or villa, anywhere you are. Flights and stay quoted up front.</p></article>
+      <article class="svc"><span class="tag">Discreet</span><h3>Private &amp; After-Hours</h3><p class="from">NDA on request</p><p>Early-morning call times, late nights and closed-door appointments.</p></article>
+    </div>
+    <p class="fest-cta"><a class="btn btn-primary" href="sms:+15622259516">Text to book concierge</a></p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Services</div><h2>What we do</h2></div>
+      <p>Every look is custom. Send your style, length and date, and we text back a private quote before anything is booked.</p>
+    </div>
+    <div class="services">
+      <article class="svc feature">
+        <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+          <span class="tag">Signature</span>
+          <h3>Instant Wicks &amp; Big Locs</h3>
+          <p class="from">Private quote</p>
+          <p>Leave with fully formed, mature-looking wicks or big locs on day one. No months of waiting for them to lock.</p>
+          <ul>
+            <li>Instant wicking, day-one results</li>
+            <li>Extra-large and custom big locs</li>
+            <li>Loc and lock repair</li>
+          </ul>
+        </div>
+        <figure class="ph" style="margin:0"><img src="media/locs-silver.jpg" alt="Mature salt-and-pepper locs with neat parts"></figure>
+      </article>
+      <article class="svc"><figure class="ph svc-ph" style="margin:0"><img src="media/p05.jpg" alt="Individual braids by Pon de Slay"></figure>
+        <span class="tag">Individuals</span>
+        <h3>Individual Braids</h3>
+        <p class="from">Private quote</p>
+        <p>Clean, square parts and even tension that protects your edges.</p>
+        <ul><li>Knotless and box braids, all sizes</li><li>Boho and curly-ends knotless</li><li>Jumbo and color braids</li></ul>
+      </article>
+      <article class="svc"><figure class="ph svc-ph" style="margin:0"><img src="media/p08.jpg" alt="Stitch braids by Pon de Slay"></figure>
+        <span class="tag">Cornrows</span>
+        <h3>Stitch &amp; Feed-In</h3>
+        <p class="from">Private quote</p>
+        <p>Sharp stitch lines and smooth feed-ins for every head, men included.</p>
+        <ul><li>Stitch braids and designs</li><li>Feed-in two-strand and Dutch</li><li>Men's braids and zig-zag parts</li></ul>
+      </article>
+      <article class="svc"><figure class="ph svc-ph" style="margin:0"><img src="media/festival-lavender.jpg" alt="Festival braids by Pon de Slay"></figure>
+        <span class="tag">Festival</span>
+        <h3>Burning Man &amp; Glow Braids</h3>
+        <p class="from">Private quote</p>
+        <p>Color, glow-in-the-dark and UV individuals made for the playa and festival season.</p>
+        <ul><li><a href="#festival">See festival braids &darr;</a></li></ul>
+      </article>
+      <article class="svc"><figure class="ph svc-ph" style="margin:0"><img src="media/p22.jpg" alt="Kids braids by Pon de Slay"></figure>
+        <span class="tag">Kids VIP</span>
+        <h3>Children's Styling</h3>
+        <p class="from">Private quote</p>
+        <p>Gentle, tender-head-friendly styling in the comfort of home.</p>
+        <ul><li>Patient pacing and breaks</li><li>Braids, ponytails and protective styles</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="festival" class="fest">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Burning Man &amp; festival season</div><h2>Playa-ready braids that glow</h2></div>
+      <p>Individual braids built for Burning Man, raves and festival weekends: bright color, glow-in-the-dark and UV strands, and an install that holds up to dust, heat and four nights of dancing.</p>
+    </div>
+    <div class="services">
+      <article class="svc">
+        <span class="tag">After dark</span>
+        <h3>Glow &amp; UV Braids</h3>
+        <p class="from">Private quote</p>
+        <p>Glow-in-the-dark and blacklight-reactive braiding hair woven through your style, so you light up after sunset.</p>
+        <ul><li>Glow-in-the-dark strands</li><li>UV / blacklight reactive color</li><li>Full head or accent braids</li></ul>
+      </article>
+      <article class="svc">
+        <span class="tag">Color play</span>
+        <h3>Festival Individuals</h3>
+        <p class="from">Private quote</p>
+        <p>Bright individual braids in any color mix, with optional tinsel, cuffs, beads and charms worked in.</p>
+        <ul><li>Rainbow, ombr√© and pastel mixes</li><li>Tinsel, cuffs and charms</li><li>Works on straight and fine hair</li></ul>
+      </article>
+      <article class="svc">
+        <span class="tag">Playa-proof</span>
+        <h3>Built to Last the Burn</h3>
+        <p class="from">Camp bookings welcome</p>
+        <p>Sealed ends and secure tension so braids stay neat through dust storms, then come out clean afterward.</p>
+        <ul><li>Dust- and heat-friendly install</li><li>Group rates for camps and crews</li><li>Book early: August fills fast</li></ul>
+      </article>
+    </div>
+    <div class="fest-gallery">
+      <figure class="ph" style="margin:0"><img src="media/festival-lavender.jpg" alt="Lavender, peach and blue festival braids"><figcaption>Pastel playa braids</figcaption></figure>
+      <figure class="ph" style="margin:0"><img src="media/princess-cyberspace.jpg" alt="Pastel pink and white festival braids"><figcaption>Princess Cyberspace</figcaption></figure>
+      <figure class="ph" style="margin:0"><img src="media/platinum-braids.jpg" alt="Platinum braids with wavy ends"><figcaption>Platinum waves</figcaption></figure>
+    </div>
+    <p class="fest-cta"><a class="btn btn-primary" href="#book" data-fest>Book festival braids</a></p>
+  </div>
+</section>
+
+<section id="work" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">The work</div><h2>From the chair</h2></div>
+      <p>Real clients, real installs. Every look below was braided by hand by Pondeslay.</p>
+    </div>
+    <div class="featured" data-list="featured">
+      <figure class="ph" style="margin:0"><img src="media/p17.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p13.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p28.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/v6.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/f4.jpg" alt="Featured braid work 4" loading="lazy"></figure>
+    </div>
+    <nav class="gal-nav" aria-label="Gallery categories">
+      <a href="#g-kids">Kids</a>
+      <a href="#g-seniorsalopecia">Seniors &amp; Alopecia</a>
+      <a href="#g-instantwicks">Instant Wicks</a>
+      <a href="#g-retwist">Retwist</a>
+      <a href="#g-individuals">Individuals</a>
+      <a href="#g-stitchbraids">Stitch Braids</a>
+      <a href="#g-twists">Twists</a>
+    </nav>
+    <h3 class="gal-h" id="g-kids">Kids</h3>
+    <div class="gallery" data-list="g-kids">
+      <figure class="ph" style="margin:0"><img src="media/p22.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p02.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a131.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a132.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a136.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a286.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u31.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a186.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+    </div>
+    <h3 class="gal-h" id="g-seniorsalopecia">Seniors &amp; Alopecia</h3>
+    <div class="gallery" data-list="g-seniorsalopecia">
+      <figure class="ph" style="margin:0"><img src="media/u15.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a123.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a124.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a283.jpg" alt="Seniors &amp; Alopecia by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a118.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a144.jpg" alt="Seniors &amp; Alopecia by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a145.jpg" alt="Seniors &amp; Alopecia by Pondeslay" loading="lazy"></figure>
+    </div>
+    <h3 class="gal-h" id="g-instantwicks">Instant Wicks</h3>
+    <div class="gallery" data-list="g-instantwicks">
+      <figure class="ph" style="margin:0"><img src="media/f1.jpg" alt="Featured braid work 1" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u20.jpg" alt="Seniors &amp; Alopecia by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/s-locs.jpg" alt="Pondeslay braid work" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a85.jpg" alt="Twists by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u7.jpg" alt="Twists by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/s-wicks.jpg" alt="Pondeslay braid work" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u26.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u27.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u28.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a154.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a155.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u21.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u23.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u24.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a79.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a80.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p01.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u2.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a152.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u32.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a287.jpg" alt="Instant Wicks by Pondeslay" loading="lazy"></figure>
+    </div>
+    <h3 class="gal-h" id="g-retwist">Retwist</h3>
+    <div class="gallery" data-list="g-retwist">
+      <figure class="ph" style="margin:0"><img src="media/a140.jpg" alt="Seniors &amp; Alopecia by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a138.jpg" alt="Retwist by Pondeslay" loading="lazy"></figure>
+    </div>
+    <h3 class="gal-h" id="g-individuals">Individuals</h3>
+    <div class="gallery" data-list="g-individuals">
+      <figure class="ph" style="margin:0"><img src="media/f3.jpg" alt="Featured braid work 3" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/f2.jpg" alt="Featured braid work 2" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p10.jpg" alt="Twists by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/s-blonde.jpg" alt="Pondeslay braid work" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/s-grey.jpg" alt="Pondeslay braid work" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/v3.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/v4.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/v5.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p05.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p06.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p23.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p25.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p39.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p16.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p21.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p36.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u3.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u11.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u12.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u13.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a107.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a128.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a81.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u29.jpg" alt="Individuals by Pondeslay" loading="lazy"></figure>
+    </div>
+    <h3 class="gal-h" id="g-stitchbraids">Stitch Braids</h3>
+    <div class="gallery" data-list="g-stitchbraids">
+      <figure class="ph" style="margin:0"><img src="media/p19.jpg" alt="Seniors &amp; Alopecia by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u17.jpg" alt="Retwist by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/v1.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/v2.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p08.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p18.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p14.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p07.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p11.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p24.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p26.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p29.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p31.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p37.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p38.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p40.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p41.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u4.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u5.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u6.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u8.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u9.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a93.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+    </div>
+    <h3 class="gal-h" id="g-twists">Twists</h3>
+    <div class="gallery" data-list="g-twists">
+      <figure class="ph" style="margin:0"><img src="media/a120.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/a133.jpg" alt="Kids by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/u16.jpg" alt="Retwist by Pondeslay" loading="lazy"></figure>
+      <figure class="ph" style="margin:0"><img src="media/p15.jpg" alt="Stitch Braids by Pondeslay" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow">How it works</div><h2>Booking in four steps</h2></div></div>
+    <div class="steps">
+      <div class="step"><h3>Pick your style</h3><p>Choose a service and send a reference photo if you have one.</p></div>
+      <div class="step"><h3>Get your quote</h3><p>Pick your style, length and location below. You see the total before you book.</p></div>
+      <div class="step"><h3>Confirm by text</h3><p>We confirm the date, time and hair needed by text message.</p></div>
+      <div class="step"><h3>We come to you</h3><p>Home, hotel or set. Relax while your style is done on site.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="book">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Rates &amp; booking</div><h2>Get your quote</h2></div>
+      <p>Pick your style and length to see your estimate, plus one travel fee. No hidden add-ons.</p>
+    </div>
+    <div class="book-grid">
+      <form id="bookForm" novalidate>
+        <div class="field full">
+          <label for="service">Service</label>
+          <select id="service">
+            <option value="300">Instant Wicks &amp; Big Locs</option>
+            <option value="220">Individual Braids (knotless / box)</option>
+            <option value="90" selected>Stitch &amp; Feed-In Braids</option>
+            <option value="180">Burning Man / Glow &amp; UV Braids</option><option value="200">Festival Individuals (color, tinsel)</option>
+            <option value="75">Children's Styling</option>
+            <option value="100">Custom / Other</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="len">Length</label>
+          <select id="len"><option value="0" selected>Shoulder or shorter</option><option value="40">Mid-back</option><option value="80">Waist or longer</option></select>
+        </div>
+        <div class="field">
+          <label for="zone">Location</label>
+          <select id="zone"><option value="30" selected>Inside Los Angeles</option><option value="50">Outside Los Angeles</option></select>
+        </div>
+        <div class="field">
+          <label for="date">Preferred date</label>
+          <input id="date" type="date">
+          <span class="err" id="dateErr"></span>
+        </div>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" type="text" autocomplete="name" placeholder="Your name">
+          <span class="err" id="nameErr"></span>
+        </div>
+        <div class="field">
+          <label for="phone">Mobile number</label>
+          <input id="phone" type="tel" autocomplete="tel" placeholder="(555) 555-0123">
+          <span class="err" id="phoneErr"></span>
+        </div>
+        <div class="field full">
+          <label for="notes">Style details</label>
+          <textarea id="notes" placeholder="Length, size, color, hair you already have, or a link to a reference photo"></textarea>
+        </div>
+        <div class="field full"><button class="btn btn-primary" type="submit">Request this booking</button></div>
+        <div class="field full" id="okBox" hidden><div class="ok" id="okMsg"></div></div>
+      </form>
+
+      <aside class="summary" aria-live="polite">
+        <div class="eyebrow">Your request</div>
+        <h3 id="sumService">Stitch &amp; Feed-In Braids</h3>
+        <p style="margin:8px 0 0;opacity:.8">Every look is quoted privately by text. Hair is included on wicks and big locs.</p>
+        <div class="contact">
+          <span>Prefer to text? Send your style and date to:</span>
+          <code id="num">562-225-9516</code>
+          <button class="copy" type="button" id="copyBtn">Copy number</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:860px">
+    <div class="sec-head"><div><div class="eyebrow">FAQ</div><h2>Good to know</h2></div></div>
+    <details open><summary>What are instant wicks?</summary><p>Wicks are thick, mature-looking locs. With instant wicking, your hair is formed into finished wicks in one session, so you leave with the look on day one instead of waiting months for the hair to lock.</p></details>
+    <details><summary>How does pricing work?</summary><p>Every look is custom, so we quote privately by text once we know your style, length and location. Hair is included on wicks and big locs.</p></details>
+    <details><summary>Do I need to buy hair?</summary><p>Tell us the style when you book. We'll confirm the type and amount of hair by text, or bring it for you if you prefer.</p></details>
+    <details><summary>Where do you travel?</summary><p>Anywhere in Los Angeles and nearby cities: homes, hotels, sets and venues. Farther trips are welcome; just ask.</p></details>
+    <details><summary>Do you style kids and men?</summary><p>Yes. Kids get gentle, patient sessions at home, and men's stitch braids and cornrows are a regular part of the book.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span><b style="color:var(--ink)">Pon de Slay</b> ¬∑ Mobile hair studio ¬∑ Los Angeles</span>
+    <span>Text to book: 562-225-9516</span>
+    <span style="flex-basis:100%;font-size:12px;opacity:.75">Government &amp; institutional buyers: SAM.gov registered through parent Sentinel Paradise Inc. ¬∑ CAGE 23T41 ¬∑ UEI L1Y3SAM1LMC9 ¬∑ Beauty schools &amp; salon services</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const fmt=n=>'$'+n.toLocaleString('en-US');
+  function update(){
+    const sel=$('service');
+    $('sumService').textContent=sel.options[sel.selectedIndex].text;
+  }
+  ['len','zone','service'].forEach(id=>$(id).addEventListener('input',update));
+  const today=new Date(); today.setMinutes(today.getMinutes()-today.getTimezoneOffset());
+  $('date').min=today.toISOString().slice(0,10);
+  document.querySelector('[data-fest]').addEventListener('click',()=>{$('service').value='180';update();});
+  update();
+
+  $('bookForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    let ok=true;
+    const set=(id,msg)=>{$(id).textContent=msg; if(msg) ok=false;};
+    set('nameErr',$('name').value.trim()?'':'Add your name so we know who to text.');
+    set('phoneErr',$('phone').value.replace(/\D/g,'').length>=10?'':'Enter a 10-digit mobile number.');
+    set('dateErr',$('date').value?'':'Pick a preferred date.');
+    if(!ok){$('okBox').hidden=true;return;}
+    $('okMsg').textContent='Request ready: '+$('service').options[$('service').selectedIndex].text+', '+$('len').options[$('len').selectedIndex].text.replace(/ \(.*\)/,'').toLowerCase()+'. To lock it in, text these details to 562-225-9516. (Online booking goes live soon.)';
+    $('okBox').hidden=false;
+  });
+
+  $('copyBtn').addEventListener('click',()=>{
+    const done=()=>{$('copyBtn').textContent='Copied';setTimeout(()=>$('copyBtn').textContent='Copy number',1600);};
+    try{navigator.clipboard.writeText('562-225-9516').then(done,()=>sel());}catch(e){sel();}
+    function sel(){const r=document.createRange();r.selectNodeContents($('num'));const s=getSelection();s.removeAllRanges();s.addRange(r);}
+  });
+})();
+</script>
+<style id="ed-style">
+.featured{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))!important;min-height:120px}
+body.editing .featured,body.editing [data-list]{min-height:120px;outline:1px dashed #c9a24a55;outline-offset:6px;border-radius:14px}
+body.editing #work .ph{cursor:grab}
+body.editing figure[data-slot]{outline:3px dashed #c9a24a;outline-offset:3px;cursor:pointer}
+.sortable-ghost{opacity:.35}
+.sortable-chosen{box-shadow:0 0 0 3px #c9a24a}
+#edbar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:50;background:rgba(20,10,14,.94);color:#f3e9ea;padding:10px 14px;border-radius:999px;font-size:13px;display:flex;gap:10px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.4);max-width:calc(100vw - 32px)}
+#edbar button{background:#c9a24a;color:#3a0f2a;border:0;border-radius:999px;padding:6px 12px;font:inherit;font-weight:600;cursor:pointer}
+#edm{position:fixed;inset:0;z-index:60;background:rgba(10,5,8,.6);display:none;align-items:center;justify-content:center;padding:16px}
+#edm.on{display:flex}
+#edm .box{background:#1c1015;color:#f3e9ea;border-radius:16px;padding:16px;max-width:380px;width:100%;max-height:90vh;overflow:auto}
+#edm img{width:100%;max-height:200px;object-fit:contain;border-radius:10px;margin-bottom:10px;background:#000}
+#edm .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#edm button{padding:9px;border-radius:10px;border:1px solid #c9a24a88;background:none;color:inherit;font:inherit;font-size:13px;cursor:pointer}
+#edm button.cur{background:#c9a24a;color:#3a0f2a}
+#edm button.wide{grid-column:1/-1}
+</style>
+<div id="edm" role="dialog" aria-modal="true" aria-label="Place photo"><div class="box"><img alt=""><div class="opts"></div></div></div>
+<div id="edbar" hidden><span id="edmsg">Tap a top photo to swap it ¬∑ drag gallery photos to reorder</span><button type="button" id="edtog">Done</button></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
+<script>
+(function(){
+  var work=document.getElementById('work'); if(!work)return;
+  // top-area photo slots (outside the gallery)
+  var SLOTN={'hero-1':'Top banner (left)','hero-2':'Top banner (right)','princess':'Princess Cyberspace card','hecula':'Hecula card','services':'Wicks & Locs service photo','svc-ind':'Individuals service photo','svc-stitch':'Stitch service photo','svc-fest':'Festival service photo','svc-kids':'Kids service photo','fest-1':'Festival photo 1','fest-2':'Festival photo 2','fest-3':'Festival photo 3'};
+  var topImgs=[].filter.call(document.querySelectorAll('figure.ph img'),function(i){return !work.contains(i)});
+  var ids=['hero-1','hero-2','princess','hecula','services','svc-ind','svc-stitch','svc-fest','svc-kids','fest-1','fest-2','fest-3'];
+  var slots={};topImgs.forEach(function(img,k){if(ids[k]){img.parentNode.setAttribute('data-slot',ids[k]);slots[ids[k]]=img}});
+  var lists=[].slice.call(work.querySelectorAll('[data-list]'));
+  function name(l){var id=l.getAttribute('data-list');if(id==='featured')return 'Featured (top row)';var h=document.getElementById(id);return h?h.textContent:id}
+  function srcOf(f){return f.querySelector('img').getAttribute('src')}
+  var ref=null,topRef=null,saveT=null,msg=document.getElementById('edmsg'),sorts=[];
+  function layout(){var o={};lists.forEach(function(l){o[l.getAttribute('data-list')]=[].map.call(l.querySelectorAll(':scope > figure'),srcOf)});return o}
+  function say(t){msg.textContent=t}
+  function save(){if(!ref){say('Changed (not saved)');return}say('Saving‚Ä¶');clearTimeout(saveT);saveT=setTimeout(function(){ref.set({lists:layout(),updated:Date.now()}).then(function(){say('Saved ¬∑ drag to reorder ¬∑ tap any photo')}).catch(function(){say('Not saved, try again')})},500)}
+  function setSlot(id,src,store){var i=slots[id];if(!i)return;i.src=src;i.removeAttribute('srcset');if(store&&topRef){var p={};p[id]=src;say('Saving‚Ä¶');topRef.update(p).then(function(){say('Saved ¬∑ drag to reorder ¬∑ tap any photo')}).catch(function(){say('Not saved, try again')})}}
+  function apply(d){if(!d||!d.lists)return;var all={};[].forEach.call(work.querySelectorAll('figure.ph'),function(f){var i=f.querySelector('img');if(i)all[i.getAttribute('src')]=f});
+    lists.forEach(function(l){var arr=d.lists[l.getAttribute('data-list')];if(!arr)return;arr.forEach(function(s){if(all[s])l.appendChild(all[s])})})}
+  var dlg=document.getElementById('edm'),opts=dlg.querySelector('.opts'),pic=dlg.querySelector('img');
+  function close(){dlg.classList.remove('on')}
+  function btn(t,cls,fn){var b=document.createElement('button');b.type='button';b.textContent=t;if(cls)b.className=cls;b.onclick=function(){fn();close()};opts.appendChild(b)}
+  function head(t){var h=document.createElement('div');h.className='wide';h.style.cssText='grid-column:1/-1;font-size:12px;opacity:.7;margin-top:6px';h.textContent=t;opts.appendChild(h)}
+  function cancel(){var c=document.createElement('button');c.type='button';c.className='wide';c.textContent='Cancel';c.onclick=close;opts.appendChild(c)}
+  function openMenu(f){pic.style.display='';pic.src=f.querySelector('img').src;opts.innerHTML='';var here=f.parentNode,src=srcOf(f);
+    head('Put this photo at the top of the site');
+    ids.forEach(function(id){if(slots[id])btn(SLOTN[id],'',function(){setSlot(id,src,true)})});
+    head('Move within the gallery');
+    btn('Move to top of this section','wide',function(){here.insertBefore(f,here.firstChild);save()});
+    btn('Move to end of this section','wide',function(){here.appendChild(f);save()});
+    lists.forEach(function(l){btn(name(l),l===here?'cur':'',function(){l.insertBefore(f,l.firstChild);save()})});
+    cancel();dlg.classList.add('on')}
+  function openSlot(id){pic.style.display='none';opts.innerHTML='';head('Pick a photo for: '+SLOTN[id]);
+    [].forEach.call(work.querySelectorAll('figure.ph img'),function(i){var s=i.getAttribute('src');var b=document.createElement('button');b.type='button';b.style.padding='0';b.innerHTML='<img alt="" style="width:100%;height:110px;object-fit:cover;margin:0;border-radius:9px">';b.firstChild.src=s;b.onclick=function(){setSlot(id,s,true);close()};opts.appendChild(b)});
+    cancel();dlg.classList.add('on')}
+  var editing=false;
+  function setEdit(on){editing=on;document.body.classList.toggle('editing',on);document.getElementById('edtog').textContent=on?'Done':'Edit photos';sorts.forEach(function(s){s.option('disabled',!on)})}
+  document.addEventListener('click',function(e){if(!editing||dlg.contains(e.target)||e.target.closest('#edbar'))return;var f=e.target.closest('figure.ph');if(!f)return;
+    var sl=f.getAttribute('data-slot');if(sl){e.preventDefault();openSlot(sl);return}
+    if(work.contains(f)&&f.parentNode.hasAttribute('data-list')){e.preventDefault();openMenu(f)}},true);
+  dlg.addEventListener('click',function(e){if(e.target===dlg)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  document.getElementById('edtog').onclick=function(){setEdit(!editing)};
+  if(window.Sortable)lists.forEach(function(l){sorts.push(Sortable.create(l,{group:'pics',animation:150,delay:180,delayOnTouchOnly:true,draggable:'figure',ghostClass:'sortable-ghost',chosenClass:'sortable-chosen',disabled:true,onEnd:save}))});
+  (async function(){try{
+    var user=await window.claude.use('user');var owner=user?await user.isOwner():false;
+    var db=await window.claude.use('db');
+    if(db){ref=db.doc('edits/order');topRef=db.doc('edits/top');
+      var s=await ref.get();apply(s&&(s.data?s.data():s));
+      var t=await topRef.get();t=t&&(t.data?t.data():t);if(t)Object.keys(t).forEach(function(k){if(slots[k]&&typeof t[k]==='string')setSlot(k,t[k],false)})}
+    if(owner){document.getElementById('edbar').hidden=false;setEdit(true)}
+  }catch(e){}})();
+})();
+</script>
