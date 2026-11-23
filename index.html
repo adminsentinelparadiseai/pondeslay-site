@@ -178,6 +178,7 @@ footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);fo
 .covers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:14px}.covers a{color:#d9c7cb;text-decoration:none;font-size:12px;line-height:1.3}.covers img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;border-radius:8px;display:block;margin-bottom:6px}.covers a:hover img{outline:2px solid #f4b8a0}@media (max-width:560px){.covers{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .poster{display:flex;gap:14px;align-items:center;margin-top:16px;color:#d9c7cb;text-decoration:none;font-size:14px;line-height:1.45;max-width:460px}.poster img{width:110px;height:auto;border-radius:8px;flex:none;box-shadow:0 8px 20px rgba(0,0,0,.35)}.poster b{color:#fff;font-family:"Playfair Display",serif;font-size:18px}.poster:hover img{outline:2px solid #f4b8a0}
 .client .tag{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(90deg,#f4b8a0,#c38bff);color:#3a0f2a;padding:6px 9px;border-radius:6px}
+.about{padding:90px 0}.about-copy{max-width:760px;font-size:18px;line-height:1.7;color:var(--muted,#5b4450)}.about-copy p{margin:0 0 14px}.about-copy b{color:#c2185b;font-weight:600}.about-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:28px}.about-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 30%;display:block}
 .fest-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
 @media (max-width:900px){.clients{grid-template-columns:1fr}}
 @media (max-width:560px){.client,.client.star{grid-template-columns:1fr}.client .ph{max-width:280px}.fest-gallery{grid-template-columns:1fr 1fr}}
@@ -230,7 +231,7 @@ footer{background:#fbefe9}
   <div class="wrap nav">
     <div class="logo"><svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="#f4b8a0" stroke-width="2.5"/><g fill="none" stroke-linecap="round"><path d="M32.0 12.0 L34.9 13.0 L37.5 14.0 L39.5 15.0 L40.7 16.0 L41.0 17.0 L40.3 18.0 L38.7 19.0 L36.3 20.0 L33.5 21.0 L30.6 22.0 L27.8 23.0 L25.4 24.0 L23.8 25.0 L23.0 26.0 L23.3 27.0 L24.4 28.0 L26.4 29.0 L29.0 30.0 L31.9 31.0 L34.8 32.0 L37.4 33.0 L39.5 34.0 L40.7 35.0 L41.0 36.0 L40.3 37.0 L38.7 38.0 L36.4 39.0 L33.7 40.0 L30.7 41.0 L27.9 42.0 L25.5 43.0 L23.8 44.0 L23.1 45.0 L23.2 46.0 L24.3 47.0 L26.3 48.0 L28.9 49.0 L31.8 50.0 L34.7 51.0 L37.3 52.0" stroke="#1a1012" stroke-width="8"/><path d="M32.0 12.0 L34.9 13.0 L37.5 14.0 L39.5 15.0 L40.7 16.0 L41.0 17.0 L40.3 18.0 L38.7 19.0 L36.3 20.0 L33.5 21.0 L30.6 22.0 L27.8 23.0 L25.4 24.0 L23.8 25.0 L23.0 26.0 L23.3 27.0 L24.4 28.0 L26.4 29.0 L29.0 30.0 L31.9 31.0 L34.8 32.0 L37.4 33.0 L39.5 34.0 L40.7 35.0 L41.0 36.0 L40.3 37.0 L38.7 38.0 L36.4 39.0 L33.7 40.0 L30.7 41.0 L27.9 42.0 L25.5 43.0 L23.8 44.0 L23.1 45.0 L23.2 46.0 L24.3 47.0 L26.3 48.0 L28.9 49.0 L31.8 50.0 L34.7 51.0 L37.3 52.0" stroke="#f4b8a0" stroke-width="4.5"/><path d="M39.8 12.0 L37.9 13.0 L35.4 14.0 L32.5 15.0 L29.6 16.0 L26.9 17.0 L24.8 18.0 L23.4 19.0 L23.0 20.0 L23.6 21.0 L25.0 22.0 L27.2 23.0 L30.0 24.0 L32.9 25.0 L35.8 26.0 L38.2 27.0 L40.0 28.0 L40.9 29.0 L40.9 30.0 L39.9 31.0 L38.0 32.0 L35.5 33.0 L32.6 34.0 L29.7 35.0 L27.0 36.0 L24.8 37.0 L23.5 38.0 L23.0 39.0 L23.5 40.0 L24.9 41.0 L27.1 42.0 L29.8 43.0 L32.8 44.0 L35.7 45.0 L38.1 46.0 L39.9 47.0 L40.9 48.0 L40.9 49.0 L39.9 50.0 L38.1 51.0 L35.6 52.0" stroke="#1a1012" stroke-width="8"/><path d="M39.8 12.0 L37.9 13.0 L35.4 14.0 L32.5 15.0 L29.6 16.0 L26.9 17.0 L24.8 18.0 L23.4 19.0 L23.0 20.0 L23.6 21.0 L25.0 22.0 L27.2 23.0 L30.0 24.0 L32.9 25.0 L35.8 26.0 L38.2 27.0 L40.0 28.0 L40.9 29.0 L40.9 30.0 L39.9 31.0 L38.0 32.0 L35.5 33.0 L32.6 34.0 L29.7 35.0 L27.0 36.0 L24.8 37.0 L23.5 38.0 L23.0 39.0 L23.5 40.0 L24.9 41.0 L27.1 42.0 L29.8 43.0 L32.8 44.0 L35.7 45.0 L38.1 46.0 L39.9 47.0 L40.9 48.0 L40.9 49.0 L39.9 50.0 L38.1 51.0 L35.6 52.0" stroke="#fde2e4" stroke-width="4.5"/><path d="M24.2 12.0 L23.2 13.0 L23.1 14.0 L24.0 15.0 L25.7 16.0 L28.1 17.0 L31.0 18.0 L33.9 19.0 L36.7 20.0 L38.9 21.0 L40.4 22.0 L41.0 23.0 L40.6 24.0 L39.3 25.0 L37.2 26.0 L34.5 27.0 L31.6 28.0 L28.7 29.0 L26.2 30.0 L24.3 31.0 L23.2 32.0 L23.1 33.0 L23.9 34.0 L25.6 35.0 L28.0 36.0 L30.9 37.0 L33.8 38.0 L36.6 39.0 L38.8 40.0 L40.4 41.0 L41.0 42.0 L40.6 43.0 L39.4 44.0 L37.3 45.0 L34.7 46.0 L31.7 47.0 L28.8 48.0 L26.3 49.0 L24.3 50.0 L23.2 51.0 L23.1 52.0" stroke="#1a1012" stroke-width="8"/><path d="M24.2 12.0 L23.2 13.0 L23.1 14.0 L24.0 15.0 L25.7 16.0 L28.1 17.0 L31.0 18.0 L33.9 19.0 L36.7 20.0 L38.9 21.0 L40.4 22.0 L41.0 23.0 L40.6 24.0 L39.3 25.0 L37.2 26.0 L34.5 27.0 L31.6 28.0 L28.7 29.0 L26.2 30.0 L24.3 31.0 L23.2 32.0 L23.1 33.0 L23.9 34.0 L25.6 35.0 L28.0 36.0 L30.9 37.0 L33.8 38.0 L36.6 39.0 L38.8 40.0 L40.4 41.0 L41.0 42.0 L40.6 43.0 L39.4 44.0 L37.3 45.0 L34.7 46.0 L31.7 47.0 L28.8 48.0 L26.3 49.0 L24.3 50.0 L23.2 51.0 L23.1 52.0" stroke="#c9566f" stroke-width="4.5"/></g></svg><span class="lw">PON DE <span>SLAY</span></span></div>
     <ul>
-      <li><a href="#clients">Clientele</a></li>
+      <li><a href="#clients">Clientele</a></li><li><a href="#about">About</a></li>
       <li><a href="#concierge">Concierge</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#festival">Burning Man</a></li>
@@ -293,6 +294,28 @@ footer{background:#fbefe9}
           <div class="covers" aria-label="Hecula releases"><a href="https://music.apple.com/us/album/come-ride-with-me/1815526198" target="_blank" rel="noopener"><img src="media/cover-come-ride-with-me.jpg" alt="Hecula Come Ride With Me album cover" loading="lazy" width="600" height="600"><span>Come Ride With Me</span></a><a href="https://music.apple.com/us/album/everyday-is-hectic/1836414792" target="_blank" rel="noopener"><img src="media/cover-everyday-is-hectic.jpg" alt="Hecula Everyday Is Hectic album cover" loading="lazy" width="600" height="600"><span>Everyday Is Hectic</span></a><a href="https://music.apple.com/us/album/hectic-therapy-mixtape/1857196927" target="_blank" rel="noopener"><img src="media/cover-hectic-therapy.jpg" alt="Hecula Hectic Therapy album cover" loading="lazy" width="600" height="600"><span>Hectic Therapy</span></a><a href="https://music.apple.com/us/album/friendly-fire-the-mixtape/1836542974" target="_blank" rel="noopener"><img src="media/cover-friendly-fire.jpg" alt="Hecula Friendly Fire album cover" loading="lazy" width="600" height="600"><span>Friendly Fire</span></a><a href="https://music.apple.com/us/album/all-stars-ep/1873052523" target="_blank" rel="noopener"><img src="media/cover-all-stars.jpg" alt="Hecula All Stars album cover" loading="lazy" width="600" height="600"><span>All Stars</span></a></div><p style="margin-top:10px"><a href="https://www.instagram.com/realisrare_22/" style="color:#f4b8a0">@realisrare_22</a></p>
         </div>
       </article>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Meet Marz</div><h2>Set-tested. Carpet-ready.</h2></div>
+      <p>Before Pon de Slay was a studio, it was a set kit.</p>
+    </div>
+    <div class="about-copy">
+      <p>Marz has worked on set with <b>The Zeus Network</b> and on set for <b>Blac Chyna</b>, keeping talent camera-ready between takes, at premieres and on the carpet. Long days, hot lights, last-minute changes: the braids have to hold, and the hands have to be fast and discreet.</p>
+      <p>That is the standard every Pon de Slay client gets, whether you are walking a red carpet or walking into Monday.</p>
+    </div>
+    <div class="about-gallery">
+        <figure class="ph" style="margin:0"><img src="media/natalie-nunn-1.jpg" alt="Marz with Natalie Nunn at a Zeus Network premiere" loading="lazy"><figcaption>With Natalie Nunn</figcaption></figure>
+        <figure class="ph" style="margin:0"><img src="media/lemuel-plummer-1.jpg" alt="Marz with Lemuel Plummer on the Zeus Network carpet" loading="lazy"><figcaption>With Lemuel Plummer</figcaption></figure>
+        <figure class="ph" style="margin:0"><img src="media/chrisean-rock-1.jpg" alt="Marz with Chrisean Rock at a Zeus Network premiere" loading="lazy"><figcaption>With Chrisean Rock</figcaption></figure>
+        <figure class="ph" style="margin:0"><img src="media/natalie-nunn-2.jpg" alt="Marz with Natalie Nunn on the carpet" loading="lazy"><figcaption>With Natalie Nunn</figcaption></figure>
+        <figure class="ph" style="margin:0"><img src="media/lemuel-plummer-2.jpg" alt="Marz and Lemuel Plummer at a Zeus Network event" loading="lazy"><figcaption>With Lemuel Plummer</figcaption></figure>
+        <figure class="ph" style="margin:0"><img src="media/chrisean-rock-2.jpg" alt="Marz with Chrisean Rock on the Zeus Network carpet" loading="lazy"><figcaption>With Chrisean Rock</figcaption></figure>
+        <figure class="ph" style="margin:0"><img src="media/natalie-nunn-3.jpg" alt="Marz and Natalie Nunn at a premiere" loading="lazy"><figcaption>With Natalie Nunn</figcaption></figure>
     </div>
   </div>
 </section>
